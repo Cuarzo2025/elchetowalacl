@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elchetowala | Survival Horror</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Paleta de colores y fuentes */
+        :root {
+            --primary-bg: #000;
+            --secondary-bg: #1a1a1a;
+            --card-bg: #333;
+            --text-color: #fff;
+            --highlight-color: #999; /* Tono de gris claro para los títulos y enlaces */
+            --font-horror: 'Creepster', cursive;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        /* Estilos generales */
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Encabezado y navegación */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            box-sizing: border-box;
+        }
+
+        .logo-text { /* Cambiado de .logo a .logo-text para diferenciar del logo-img */
+            font-family: var(--font-horror);
+            font-size: 2.5rem;
+            color: var(--highlight-color);
+            letter-spacing: 2px;
+        }
+
+        /* Estilo para el logo en la cabecera */
+        .header .logo-img {
+            height: 40px; /* Tamaño pequeño del logo */
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 10px 15px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--highlight-color);
+        }
+
+        /* Menú desplegable */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            list-style: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--card-bg);
+            padding: 10px 0;
+            display: none;
+            flex-direction: column;
+            width: 200px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .dropdown-menu a {
+            width: 100%;
+            padding: 10px 20px;
+        }
+
+        /* Sección principal */
+        .main-content {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 80px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        #hero {
+            background-color: var(--primary-bg); /* Fondo negro para que se vea el banner */
+            color: var(--text-color);
+            padding-top: 0; /* Elimina padding superior para que el banner toque el header */
+            min-height: auto; /* Permite que el tamaño se ajuste al contenido */
+            padding-bottom: 50px; /* Espacio para la imagen elchetowala */
+        }
+
+        .hero-banner {
+            width: 100%;
+            max-height: 400px; /* Altura máxima para el banner */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        .hero-elchetowala-img {
+            max-width: 60%; /* Tamaño de la imagen elchetowala */
+            height: auto;
+            display: block;
+            margin: 0 auto 30px auto; /* Centrar y añadir margen inferior */
+            border: 2px solid var(--highlight-color); /* Borde para que destaque */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero-text h1 {
+            font-family: var(--font-horror);
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: var(--text-color);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+        }
+
+        .hero-text p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: var(--font-horror);
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+        }
+
+        .section-content {
+            max-width: 800px;
+            line-height: 1.6;
+            width: 100%;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .video-card iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+        }
+        
+        /* Estilos del nuevo botón de OST */
+        .ost-button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin-top: 20px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s;
+            border: 1px solid var(--highlight-color);
+        }
+        
+        .ost-button:hover {
+            background-color: var(--highlight-color);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Botones flotantes de redes sociales */
+        .social-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .social-buttons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: var(--text-color);
+            font-size: 2rem;
+            transition: transform 0.3s;
+            background-color: var(--card-bg);
+        }
+
+        .social-buttons a:hover {
+            transform: scale(1.1);
+        }
+
+        .youtube-btn { color: #ff0000; }
+        .twitch-btn { color: #6441a5; }
+        .kick-btn { color: #53b841; }
+
+        /* Media Queries para pantallas más pequeñas (móviles) */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .logo-text {
+                font-size: 2rem;
+            }
+            .header .logo-img {
+                height: 30px; /* Logo más pequeño en móvil */
+            }
+
+            .nav-links a {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+            
+            .hero-banner {
+                max-height: 200px; /* Banner más pequeño en móvil */
+            }
+
+            .hero-elchetowala-img {
+                max-width: 80%; /* Imagen elchetowala más grande en móvil */
+            }
+
+            /* Ocultar el menú desplegable en pantallas pequeñas si no se necesita, o hacer un menú hamburguesa */
+            .dropdown {
+                display: none; /* Por ahora lo ocultamos para mantener la simplicidad */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <img src="logochetowala.jpeg" alt="Logo Elchetowala" class="logo-img">
+            <span class="logo-text">Elchetowala</span>
+        </div>
+        <nav class="nav">
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">Menú</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#historia">Historia de Videojuegos</a></li>
+                        <li><a href="#ost">Descarga de OST</a></li>
+                        <li><a href="#book">Videos del Canal</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="hero">
+            <img src="elchetowalabanner.jpeg" alt="Banner de Elchetowala" class="hero-banner">
+            <img src="elchetowala.jpeg" alt="Imagen del canal Elchetowala" class="hero-elchetowala-img">
+            <div class="hero-text">
+                <h1>Terror que te atrapa.</h1>
+                <p>El mejor contenido de Survival Horror, Resident Evil y Silent Hill. ¿Te atreves a entrar?</p>
+            </div>
+        </section>
+
+        <section id="historia">
+            <h2>Historia de Videojuegos</h2>
+            <div class="section-content">
+                <p>Explora los orígenes y la evolución del género de terror en los videojuegos. Desde los clásicos que definieron una era hasta los títulos modernos que te pondrán los pelos de punta. Descubre los secretos detrás de tus sagas favoritas.</p>
+            </div>
+        </section>
+
+        <section id="ost">
+            <h2>Descarga de OST</h2>
+            <div class="section-content">
+                <p>La atmósfera es clave. Aquí podrás descargar las bandas sonoras originales que crearon la tensión perfecta en juegos como Resident Evil y Silent Hill. Sumérgete en la música que te hizo saltar del asiento.</p>
+                
+                <a href="ost.html" class="ost-button">Explorar OST</a>
+            </div>
+        </section>
+
+        <section id="book">
+            <h2>Book del Canal</h2>
+            <div class="section-content video-grid">
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <div class="video-card">
+                    <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+                </div>
+                </div>
+        </section>
+    </main>
+
+    <div class="social-buttons">
+        <a href="https://www.youtube.com/@elchetowala" target="_blank" class="youtube-btn"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.twitch.tv/Elchetowala" target="_blank" class="twitch-btn"><i class="fab fa-twitch"></i></a>
+        <a href="https://kick.com/Elchetowala" target="_blank" class="kick-btn"><i class="fab fa-kickstarter-k"></i></a>
+    </div>
+
+</body>
+</html>

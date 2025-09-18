@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga de OST | Elchetowala</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Paleta de colores y fuentes */
+        :root {
+            --primary-bg: #000;
+            --secondary-bg: #1a1a1a;
+            --card-bg: #333;
+            --text-color: #fff;
+            --highlight-color: #999;
+            --font-horror: 'Creepster', cursive;
+            --font-mono: 'Roboto Mono', monospace;
+        }
+
+        /* Estilos generales */
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            font-family: var(--font-mono);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Títulos */
+        h1 {
+            font-family: var(--font-horror);
+            font-size: clamp(2rem, 8vw, 4rem);
+            color: var(--highlight-color);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        /* Contenedor de portadas */
+        .ost-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        /* Estilo de la tarjeta de portada */
+        .ost-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 300px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .ost-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+        }
+
+        .ost-card-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .ost-card-title {
+            text-align: center;
+            font-family: var(--font-horror);
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--highlight-color);
+            margin-top: 15px;
+        }
+
+        /* Lista de canciones oculta */
+        .ost-list {
+            list-style: none;
+            padding: 0 20px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ost-list.active {
+            display: flex;
+        }
+        
+        /* Estilos para cada canción */
+        .ost-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--secondary-bg);
+        }
+
+        .ost-item:last-child {
+            border-bottom: none;
+        }
+
+        .ost-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .ost-item a:hover {
+            color: var(--highlight-color);
+        }
+
+        .download-btn {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .download-btn:hover {
+            background-color: var(--highlight-color);
+            color: #000;
+        }
+
+        /* Botón de regreso */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin: 40px auto;
+            color: var(--highlight-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .ost-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .ost-card {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Descarga de Bandas Sonoras</h1>
+
+    <div class="ost-container">
+
+        <div class="ost-card" onclick="toggleList('re1-list')">
+            <img src="RE1.jpeg" alt="Portada Resident Evil 1" class="ost-card-image">
+            <h2 class="ost-card-title">Resident Evil 1</h2>
+            <ul id="re1-list" class="ost-list">
+                <li class="ost-item"><span>Safe Haven</span> <a href="url-descarga-re1-1.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>The Moonlight Sonata</span> <a href="url-descarga-re1-2.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>Terror (Darkness Lives)</span> <a href="url-descarga-re1-3.mp3" download class="download-btn">Descargar</a></li>
+                </ul>
+        </div>
+
+        <div class="ost-card" onclick="toggleList('re2-list')">
+            <img src="RE2.jpeg" alt="Portada Resident Evil 2" class="ost-card-image">
+            <h2 class="ost-card-title">Resident Evil 2</h2>
+            <ul id="re2-list" class="ost-list">
+                <li class="ost-item"><span>Secure Place</span> <a href="url-descarga-re2-1.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>Ada's Theme</span> <a href="url-descarga-re2-2.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>The Beginning of Story</span> <a href="url-descarga-re2-3.mp3" download class="download-btn">Descargar</a></li>
+                </ul>
+        </div>
+
+        <div class="ost-card" onclick="toggleList('re3-list')">
+            <img src="RE3NEMESIS.jpeg" alt="Portada Resident Evil 3 Nemesis" class="ost-card-image">
+            <h2 class="ost-card-title">Resident Evil 3</h2>
+            <ul id="re3-list" class="ost-list">
+                <li class="ost-item"><span>Free From Fear</span> <a href="url-descarga-re3-1.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>Nemesis' Theme</span> <a href="url-descarga-re3-2.mp3" download class="download-btn">Descargar</a></li>
+                <li class="ost-item"><span>The City of Ruin</span> <a href="url-descarga-re3-3.mp3" download class="download-btn">Descargar</a></li>
+                </ul>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">← Volver a la página principal</a>
+
+    <script>
+        function toggleList(id) {
+            const list = document.getElementById(id);
+            list.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
